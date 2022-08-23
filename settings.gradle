@@ -10,3 +10,4 @@ rootProject.name = "AndroidLab"
 include ':app'
 include ':c11'
 include ':c12'
+include ':c13'

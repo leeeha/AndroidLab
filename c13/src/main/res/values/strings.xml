@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">c13</string>
+    <string name="sesac_contact">SeSAC - 웹페이지 : https://ssac.seoul.kr/, 전화번호 : 02-3667-7304, 이메일 : ssac@sba.seoul.kr</string>
+    <string name="sesac_info">
+서울특별시와 서울산업진흥원(SBA)은 SW전문 인력의 양성과 적소공급을 위해 새롭게 서남권 지역(영등포)에 캠퍼스를 조성하였습니다.
+싹(Seoul Software Academy Cluster, SSAC)은 캠퍼스의 교육브랜드로 서울시에서 SW인재 양성을 위해 ‘싹’을 틔우고 성장시켜, 개발자를 꿈꾸는 청년들이 ‘SW개발자로 데뷔’ 할 수 있도록 돕는 교육 프로그램을 의미합니다.
+    </string>
+</resources>
