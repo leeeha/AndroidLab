@@ -1,31 +1,56 @@
 package com.tutorial.c23
 
 import android.os.Bundle
-import android.view.MotionEvent
-import android.widget.TextView
+import android.os.SystemClock
+import android.util.Log
+import android.widget.Button
+import android.widget.Chronometer
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
-    lateinit var resultView: TextView
+    var pauseTime = 0L
+    lateinit var startButton: Button
+    lateinit var stopButton: Button
+    lateinit var resetButton: Button
+    lateinit var chronometer: Chronometer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        resultView = findViewById(R.id.resultView)
-    }
+        startButton = findViewById(R.id.startButton)
+        stopButton = findViewById(R.id.stopButton)
+        resetButton = findViewById(R.id.resetButton)
+        chronometer = findViewById(R.id.chronometer)
 
-    override fun onTouchEvent(event: MotionEvent?): Boolean {
-        var eventType = ""
+        startButton.setOnClickListener {
+            // elapsedRealtime(): 부팅 시점부터 현재까지 흘러간 시간을 ms로 반환
+            chronometer.base = SystemClock.elapsedRealtime() + pauseTime
+            chronometer.start()
 
-        when(event?.action){
-            MotionEvent.ACTION_DOWN -> eventType = "DOWN EVENT"
-            MotionEvent.ACTION_UP -> eventType = "UP EVENT"
-            MotionEvent.ACTION_MOVE -> eventType = "MOVE EVENT"
+            stopButton.isEnabled = true
+            resetButton.isEnabled = true
+            startButton.isEnabled = false
         }
 
-        resultView.text = "$eventType : (${event?.x},  ${event?.y})"
+        stopButton.setOnClickListener {
+            pauseTime =  SystemClock.elapsedRealtime() - chronometer.base
+            Log.e("PAUSE TIME", (pauseTime / 1000).toString())
+            chronometer.stop()
 
-        return super.onTouchEvent(event)
+            stopButton.isEnabled = false
+            resetButton.isEnabled = true
+            startButton.isEnabled = true
+        }
+
+        resetButton.setOnClickListener {
+            pauseTime = 0L
+            chronometer.base = SystemClock.elapsedRealtime()
+            chronometer.stop()
+
+            stopButton.isEnabled = false
+            resetButton.isEnabled = false
+            startButton.isEnabled = true
+        }
     }
 }
