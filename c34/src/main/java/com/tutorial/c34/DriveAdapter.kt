@@ -18,10 +18,12 @@ class DriveAdapter(cxt: Context, val resId: Int, val data: MutableList<DriveVO>)
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         var view = convertView
         if (view == null) {
+            // custom_item.xml 레이아웃 인플레이트 시키기
             val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)
                     as LayoutInflater
             view = inflater.inflate(resId, null)
 
+            // 뷰 홀더에서 레이아웃과 뷰 바인딩 시키기
             val holder = DriveHolder(view)
             view!!.tag = holder
         }
