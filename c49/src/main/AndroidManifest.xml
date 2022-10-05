@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.tutorial.c48">
+    package="com.tutorial.c49">
 
     <application
         android:allowBackup="true"
