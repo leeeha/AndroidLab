@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:key="a_category"
+        android:title="A Setting">
+        <SwitchPreferenceCompat
+            android:key="a1"
+            android:title="A - 1 Setting"/>
+        <SwitchPreferenceCompat
+            android:key="a2"
+            android:title="A - 2 Setting"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="b_category"
+        android:title="B Setting">
+        <SwitchPreferenceCompat
+            android:key="b1"
+            android:title="B - 1 Setting"/>
+        <SwitchPreferenceCompat
+            android:key="b2"
+            android:title="B - 2 Setting"/>
+    </PreferenceCategory>
+</PreferenceScreen>
