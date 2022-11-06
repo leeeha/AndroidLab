@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
 
 //            db.execSQL("insert into tb_memo (title, content) values (?, ?)",
 //                arrayOf(title, content))
+
             val values = ContentValues()
             values.put("title", title)
             values.put("content", content)
