@@ -1,5 +1,6 @@
 package com.tutorial.c60
 
+import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -18,10 +19,14 @@ class MainActivity : AppCompatActivity() {
         addBtn.setOnClickListener {
             val title = titleView.text.toString()
             val content = contentView.text.toString()
-
             val db = DBHelper(this).writableDatabase
-            db.execSQL("insert into tb_memo (title, content) values (?, ?)",
-                arrayOf(title, content))
+
+//            db.execSQL("insert into tb_memo (title, content) values (?, ?)",
+//                arrayOf(title, content))
+            val values = ContentValues()
+            values.put("title", title)
+            values.put("content", content)
+            db.insert("tb_memo", null, values)
             db.close()
 
             val intent = Intent(this, ReadActivity::class.java)
