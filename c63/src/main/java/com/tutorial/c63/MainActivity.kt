@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
         val requestActivity = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
         ) {
+            // 컨텐츠 프로파이더에게 데이터 요청
             val cursor = contentResolver.query(
                 it.data!!.data!!, // 유저가 선택한 항목의 식별자 값 (uri)
                 arrayOf(
@@ -53,7 +54,7 @@ class MainActivity : AppCompatActivity() {
                 // 주소록 목록 화면으로 넘어가기
                 val intent = Intent(
                     Intent.ACTION_PICK,
-                    ContactsContract.CommonDataKinds.Phone.CONTENT_URI
+                    ContactsContract.CommonDataKinds.Phone.CONTENT_URI // 전화번호가 있는 사람만 출력
                 )
                 requestActivity.launch(intent)
             } else {
