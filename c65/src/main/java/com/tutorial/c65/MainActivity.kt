@@ -25,9 +25,9 @@ class MainActivity : AppCompatActivity() {
             if(isGranted){
                 val intent = Intent(Intent.ACTION_CALL,
                     Uri.parse("tel:${editView.text}"))
-                startActivity(intent)
+                startActivity(intent) // 암시적 인텐트로 전화 앱 띄우기
             }else{
-                Toast.makeText(this, "denied", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "permission denied", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
                 val intent = Intent(Intent.ACTION_CALL,
                     Uri.parse("tel:${editView.text}"))
                 startActivity(intent)
-            }else{
+            }else{ // 퍼미션 재요청
                 permissionLauncher.launch("android.permission.CALL_PHONE")
             }
         }
