@@ -1,6 +1,5 @@
 package com.tutorial.c63
 
-import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
@@ -8,13 +7,9 @@ import android.provider.ContactsContract
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-
-val PERMISSIONS_REQUEST_CODE = 100
-var REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.READ_CONTACTS)
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,16 +19,16 @@ class MainActivity : AppCompatActivity() {
         val button = findViewById<Button>(R.id.button)
         val resultView = findViewById<TextView>(R.id.resultView)
 
-        val requestActivity: ActivityResultLauncher<Intent> = registerForActivityResult(
+        // 다른 액티비티로부터 결과 값을 받는 경우 -> StartActivityForResult
+        val requestActivity = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
         ) {
-            // 주소록에서 메인 액티비티로 다시 돌아오면
             val cursor = contentResolver.query(
-                it.data!!.data!!, // 유저가 선택한 항목의 식별자 값
+                it.data!!.data!!, // 유저가 선택한 항목의 식별자 값 (uri)
                 arrayOf(
                     ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME, // 이름
-                    ContactsContract.CommonDataKinds.Phone.NUMBER
-                ), // 전화번호
+                    ContactsContract.CommonDataKinds.Phone.NUMBER // 전화번호
+                ),
                 null,
                 null,
                 null
@@ -42,13 +37,15 @@ class MainActivity : AppCompatActivity() {
             var name = "none"
             var phone = "none"
             if (cursor!!.moveToFirst()) {
-                name = cursor?.getString(0)
-                phone = cursor?.getString(1)
+                name = cursor.getString(0)
+                phone = cursor.getString(1)
             }
 
+            // 이름과 전화번호를 텍스트뷰에 보여주기
             resultView.text = "result: name - ${name}, phone - ${phone}"
         }
 
+        // 주소록에 대한 퍼미션 요청
         val permissionLauncher = registerForActivityResult(
             ActivityResultContracts.RequestPermission()
         ) { isGranted ->
@@ -59,7 +56,7 @@ class MainActivity : AppCompatActivity() {
                     ContactsContract.CommonDataKinds.Phone.CONTENT_URI
                 )
                 requestActivity.launch(intent)
-            } else { // todo: 퍼미션 재요청
+            } else {
                 Toast.makeText(this, "permission denied", Toast.LENGTH_SHORT).show()
             }
         }
@@ -73,7 +70,7 @@ class MainActivity : AppCompatActivity() {
                 val intent = Intent(Intent.ACTION_PICK,
                     ContactsContract.CommonDataKinds.Phone.CONTENT_URI)
                 requestActivity.launch(intent)
-            }else{ // todo: 퍼미션 재요청
+            }else{
                 permissionLauncher.launch("android.permission.READ_CONTACTS")
             }
         }
