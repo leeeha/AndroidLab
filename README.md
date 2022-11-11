@@ -12,7 +12,7 @@ https://sesac.seoul.kr/course/active/detail.do
 
 3. 앱 개발 환경을 구축하자. 
 
-(4. 앱을 Google Play Store 에 배포해 보자.)
+4. 앱을 Google Play Store 에 배포해 보자.
 
 <br>
 
@@ -82,7 +82,7 @@ https://sesac.seoul.kr/course/active/detail.do
 
 ### 9주차 
 
-(23. 유저 위치 정보를 앱에 적용해 보자.) 
+23. 유저 위치 정보를 앱에 적용해 보자.
 
 24. 네트워크 프로그래밍으로 서버와 데이터를 주고받자. (레트로핏) 
 
